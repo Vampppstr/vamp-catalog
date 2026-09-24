@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MY STORE</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0b0b0d;
+    color: white;
+    min-height: 100vh;
+}
+
+.header {
+    padding: 25px 18px 15px;
+    position: sticky;
+    top: 0;
+    background: rgba(11,11,13,0.95);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+}
+
+.search {
+    width: 100%;
+    background: #19191d;
+    border: 1px solid #29292e;
+    border-radius: 14px;
+    padding: 14px 16px;
+    color: white;
+    font-size: 15px;
+    outline: none;
+}
+
+.search::placeholder {
+    color: #777;
+}
+
+.categories {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 15px 18px;
+}
+
+.category {
+    border: none;
+    background: #19191d;
+    color: #aaa;
+    padding: 10px 16px;
+    border-radius: 20px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.category.active {
+    background: white;
+    color: black;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 5px 14px 30px;
+}
+
+.product {
+    background: #151518;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s;
+}
+
+.product:active {
+    transform: scale(0.97);
+}
+
+.product-image {
+    width: 100%;
+    aspect-ratio: 1 / 1.15;
+    object-fit: cover;
+    display: block;
+}
+
+.product-info {
+    padding: 12px;
+}
+
+.product-name {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.product-price {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.product-category {
+    font-size: 11px;
+    color: #777;
+    margin-top: 5px;
+}
+
+.empty {
+    display: none;
+    text-align: center;
+    color: #777;
+    padding: 60px 20px;
+    grid-column: 1 / -1;
+}
+
+/* ОКНО ТОВАРА */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: flex-end;
+    z-index: 100;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: #151518;
+    width: 100%;
+    max-height: 92vh;
+    overflow-y: auto;
+    border-radius: 24px 24px 0 0;
+    padding-bottom: 25px;
+    animation: slideUp 0.2s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.modal-image {
+    width: 100%;
+    max-height: 430px;
+    object-fit: cover;
+}
+
+.modal-info {
+    padding: 20px;
+}
+
+.modal-name {
+    font-size: 25px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.modal-price {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.modal-description {
+    color: #aaa;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.sizes-title {
+    font-size: 14px;
+    color: #aaa;
+    margin-bottom: 10px;
+}
+
+.sizes {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.size {
+    background: #202024;
+    border: 1px solid #303035;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.order {
+    width: 100%;
+    border: none;
+    background: white;
+    color: black;
+    padding: 16px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        MY STORE
+    </div>
+
+    <input
+        class="search"
+        id="search"
+        placeholder="🔍 Поиск товаров..."
+    >
+
+</header>
+
+
+<div class="categories">
+
+    <button class="category active" onclick="filterProducts('all', this)">
+        Все
+    </button>
+
+    <button class="category" onclick="filterProducts('hoodies', this)">
+        Худи
+    </button>
+
+    <button class="category" onclick="filterProducts('shoes', this)">
+        Обувь
+    </button>
+
+    <button class="category" onclick="filterProducts('tshirts', this)">
+        Футболки
+    </button>
+
+</div>
+
+
+<main class="products" id="products">
+
+    <!-- ТОВАР 1 -->
+
+    <div
+        class="product"
+        data-category="hoodies"
+        data-name="Oversized Hoodie"
+        onclick="openProduct(0)"
+    >
+
+        <img
+            class="product-image"
+            src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800"
+        >
+
+        <div class="product-info">
+
+            <div class="product-name">
+                Oversized Hoodie
+            </div>
+
+            <div class="product-price">
+                $120
+            </div>
+
+            <div class="product-category">
+                Худи
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ТОВАР 2 -->
+
+    <div
+        class="product"
+        data-category="shoes"
+        data-name="Runner Sneakers"
+        onclick="openProduct(1)"
+    >
+
+        <img
+            class="product-image"
+            src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800"
+        >
+
+        <div class="product-info">
+
+            <div class="product-name">
+                Runner Sneakers
+            </div>
+
+            <div class="product-price">
+                $250
+            </div>
+
+            <div class="product-category">
+                Обувь
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ТОВАР 3 -->
+
+    <div
+        class="product"
+        data-category="tshirts"
+        data-name="Basic T-Shirt"
+        onclick="openProduct(2)"
+    >
+
+        <img
+            class="product-image"
+            src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800"
+        >
+
+        <div class="product-info">
+
+            <div class="product-name">
+                Basic T-Shirt
+            </div>
+
+            <div class="product-price">
+                $60
+            </div>
+
+            <div class="product-category">
+                Футболки
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ТОВАР 4 -->
+
+    <div
+        class="product"
+        data-category="hoodies"
+        data-name="Black Zip Hoodie"
+        onclick="openProduct(3)"
+    >
+
+        <img
+            class="product-image"
+            src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800"
+        >
+
+        <div class="product-info">
+
+            <div class="product-name">
+                Black Zip Hoodie
+            </div>
+
+            <div class="product-price">
+                $140
+            </div>
+
+            <div class="product-category">
+                Худи
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="empty" id="empty">
+        Ничего не найдено
+    </div>
+
+</main>
+
+
+<!-- ОКНО ТОВАРА -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-content">
+
+        <button class="close" onclick="closeProduct()">
+            ×
+        </button>
+
+        <img
+            class="modal-image"
+            id="modalImage"
+        >
+
+        <div class="modal-info">
+
+            <div
+                class="modal-name"
+                id="modalName"
+            ></div>
+
+            <div
+                class="modal-price"
+                id="modalPrice"
+            ></div>
+
+            <div
+                class="modal-description"
+                id="modalDescription"
+            ></div>
+
+            <div class="sizes-title">
+                Размер
+            </div>
+
+            <div class="sizes">
+
+                <button class="size">S</button>
+                <button class="size">M</button>
+                <button class="size">L</button>
+                <button class="size">XL</button>
+
+            </div>
+
+            <button
+                class="order"
+                onclick="orderProduct()"
+            >
+                ЗАКАЗАТЬ
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const products = [
+
+    {
+        name: "Oversized Hoodie",
+        price: "$120",
+        image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=1000",
+        description: "Объёмное худи свободного кроя. Плотный материал, минималистичный дизайн."
+    },
+
+    {
+        name: "Runner Sneakers",
+        price: "$250",
+        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1000",
+        description: "Массивные кроссовки в современном стиле."
+    },
+
+    {
+        name: "Basic T-Shirt",
+        price: "$60",
+        image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1000",
+        description: "Базовая футболка свободного кроя."
+    },
+
+    {
+        name: "Black Zip Hoodie",
+        price: "$140",
+        image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=1000",
+        description: "Чёрное худи на молнии."
+    }
+
+];
+
+
+function openProduct(index) {
+
+    const product = products[index];
+
+    document.getElementById("modalImage").src = product.image;
+
+    document.getElementById("modalName").textContent = product.name;
+
+    document.getElementById("modalPrice").textContent = product.price;
+
+    document.getElementById("modalDescription").textContent = product.description;
+
+    document.getElementById("modal").classList.add("show");
+
+}
+
+
+function closeProduct() {
+
+    document.getElementById("modal").classList.remove("show");
+
+}
+
+
+function orderProduct() {
+
+    alert("Для заказа напишите нам в Telegram.");
+
+}
+
+
+function filterProducts(category, button) {
+
+    document
+        .querySelectorAll(".category")
+        .forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
+
+    const items =
+        document.querySelectorAll(".product");
+
+    items.forEach(item => {
+
+        if (
+            category === "all" ||
+            item.dataset.category === category
+        ) {
+
+            item.style.display = "block";
+
+        } else {
+
+            item.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+document
+    .getElementById("search")
+    .addEventListener("input", function() {
+
+        const query =
+            this.value.toLowerCase();
+
+        let found = 0;
+
+        document
+            .querySelectorAll(".product")
+            .forEach(item => {
+
+                const name =
+                    item.dataset.name.toLowerCase();
+
+                if (name.includes(query)) {
+
+                    item.style.display = "block";
+
+                    found++;
+
+                } else {
+
+                    item.style.display = "none";
+
+                }
+
+            });
+
+
+        document
+            .getElementById("empty")
+            .style.display =
+                found === 0 ? "block" : "none";
+
+    });
+
+
+</script>
+
+</body>
+</html>
