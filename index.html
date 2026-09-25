@@ -137,7 +137,7 @@ body {
     background: rgba(0,0,0,0.75);
     backdrop-filter: blur(8px);
     display: none;
-    align-items: center;
+    align-items: flex-end;
     z-index: 100;
 }
 
@@ -147,16 +147,15 @@ body {
 
 .modal-content {
     background: #151518;
-    width: 90%;
-    max-width: 430px;
+    width: 100%;
+    max-width: none;
     max-height: 90vh;
     overflow-y: auto;
-    border-radius: 24px;
+    border-radius: 24px 24px 0 0;
     padding-bottom: 25px;
     animation: slideUp 0.2s ease;
     margin: auto;
 }
-
 @keyframes slideUp {
     from {
         transform: translateY(100%);
