@@ -542,7 +542,20 @@ function closeProduct() {
 
 function orderProduct() {
 
-    alert("Выберите размер для заказа.");
+    const sizes = ["S", "M", "L", "XL"];
+
+    const size = prompt(
+        "Выберите размер:\n\nS\nM\nL\nXL"
+    );
+
+    if (!size) return;
+
+    if (!sizes.includes(size.toUpperCase())) {
+        alert("Пожалуйста, выберите размер: S, M, L или XL.");
+        return;
+    }
+
+    alert("Вы выбрали размер: " + size.toUpperCase());
 
 }
 
