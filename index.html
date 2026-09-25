@@ -564,15 +564,12 @@ function closeProduct() {
 
 function orderProduct() {
 
-    const modal = document.getElementById("modal");
+    if (!selectedSize) {
+        alert("Пожалуйста, выберите размер.");
+        return;
+    }
 
-    const size = prompt(
-        "ВЫБЕРИТЕ РАЗМЕР\n\nS     M     L     XL"
-    );
-
-    if (!size) return;
-
-    alert("Вы выбрали размер: " + size.toUpperCase());
+    alert("Вы выбрали размер: " + selectedSize);
 
 }
 
