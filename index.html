@@ -552,6 +552,28 @@ function openProduct(index) {
 
     document.getElementById("modalDescription").textContent = product.description;
 
+    const sizesContainer = document.querySelector(".sizes");
+
+    sizesContainer.innerHTML = "";
+
+    product.sizes.forEach(size => {
+
+        const button = document.createElement("button");
+
+        button.className = "size";
+
+        button.textContent = size;
+
+        button.onclick = function() {
+            selectSize(this);
+        };
+
+        sizesContainer.appendChild(button);
+
+    });
+
+    selectedSize = "";
+
     document.getElementById("modal").classList.add("show");
 
 }
