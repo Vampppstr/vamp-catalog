@@ -460,10 +460,12 @@ body {
 
             <div class="sizes">
 
-                <button class="size">S</button>
-                <button class="size">M</button>
-                <button class="size">L</button>
-                <button class="size">XL</button>
+    <button class="size" onclick="selectSize(this)">S</button>
+    <button class="size" onclick="selectSize(this)">M</button>
+    <button class="size" onclick="selectSize(this)">L</button>
+    <button class="size" onclick="selectSize(this)">XL</button>
+
+</div>
 
             </div>
 
@@ -542,18 +544,13 @@ function closeProduct() {
 
 function orderProduct() {
 
-    const sizes = ["S", "M", "L", "XL"];
+    const modal = document.getElementById("modal");
 
     const size = prompt(
-        "Выберите размер:\n\nS\nM\nL\nXL"
+        "ВЫБЕРИТЕ РАЗМЕР\n\nS     M     L     XL"
     );
 
     if (!size) return;
-
-    if (!sizes.includes(size.toUpperCase())) {
-        alert("Пожалуйста, выберите размер: S, M, L или XL.");
-        return;
-    }
 
     alert("Вы выбрали размер: " + size.toUpperCase());
 
