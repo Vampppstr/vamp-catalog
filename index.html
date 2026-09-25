@@ -137,7 +137,7 @@ body {
     background: rgba(0,0,0,0.75);
     backdrop-filter: blur(8px);
     display: none;
-    align-items: flex-end;
+    align-items: center;
     z-index: 100;
 }
 
@@ -147,10 +147,11 @@ body {
 
 .modal-content {
     background: #151518;
-    width: 100%;
-    max-height: 92vh;
+    width: 90%;
+    max-width: 430px;
+    max-height: 90vh;
     overflow-y: auto;
-    border-radius: 24px 24px 0 0;
+    border-radius: 24px;
     padding-bottom: 25px;
     animation: slideUp 0.2s ease;
 }
@@ -169,28 +170,32 @@ body {
     width: 100%;
     max-height: 430px;
     object-fit: cover;
+    border-radius: 20px 20px 0 0;
 }
 
 .modal-info {
-    padding: 20px;
+    padding: 20px 20px 10px;
 }
 
 .modal-name {
-    font-size: 25px;
+    font-size: 24px;
     font-weight: 800;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    line-height: 1.15;
 }
 
 .modal-price {
-    font-size: 22px;
+    font-size: 21px;
     font-weight: 700;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
+    letter-spacing: 0.2px;
 }
 
 .modal-description {
     color: #aaa;
+    font-size: 14px;
     line-height: 1.5;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .sizes-title {
@@ -210,13 +215,17 @@ body {
     background: #202024;
     border: 1px solid #303035;
     color: white;
-    padding: 10px 15px;
-    border-radius: 10px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.15s ease;
 }
     .size.selected {
     background: white;
     color: black;
     border-color: white;
+    transform: scale(1.03);
 }
 
 
@@ -230,6 +239,11 @@ body {
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
+    transition: 0.15s ease;
+}
+    
+    .order:active {
+    transform: scale(0.98);
 }
 
 .close {
