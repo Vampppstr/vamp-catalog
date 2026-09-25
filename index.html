@@ -485,6 +485,20 @@ body {
 
 <script>
 
+let selectedSize = "";
+
+function selectSize(button) {
+
+    document.querySelectorAll(".size").forEach(btn => {
+        btn.classList.remove("selected");
+    });
+
+    button.classList.add("selected");
+
+    selectedSize = button.textContent;
+
+}
+
 const products = [
 
     {
