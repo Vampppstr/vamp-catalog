@@ -30,11 +30,24 @@ body {
     z-index: 10;
 }
 
+    .menu-button {
+    position: absolute;
+    top: 22px;
+    left: 18px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 26px;
+    cursor: pointer;
+    z-index: 20;
+}
+
 .logo {
     font-size: 28px;
     font-weight: 800;
     letter-spacing: 2px;
     margin-bottom: 18px;
+    margin-left: 42px;
 }
 
 .search {
@@ -269,12 +282,52 @@ body {
     cursor: pointer;
 }
 
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background: #151518;
+    z-index: 200;
+    padding: 80px 20px 20px;
+    transform: translateX(-100%);
+    transition: 0.25s ease;
+    box-shadow: 10px 0 30px rgba(0,0,0,0.4);
+}
+
+.side-menu.show {
+    transform: translateX(0);
+}
+
+.side-menu-title {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.side-menu button {
+    width: 100%;
+    background: #202024;
+    border: 1px solid #303035;
+    color: white;
+    padding: 14px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+    
 </style>
 </head>
 
 <body>
 
 <header class="header">
+
+    <button class="menu-button" onclick="openMenu()">☰</button>
 
     <div class="logo">
         Vamp Store
@@ -287,6 +340,22 @@ body {
     >
 
 </header>
+
+    <div id="sideMenu" class="side-menu">
+
+    <div class="side-menu-title">
+        Бренды
+    </div>
+
+    <button onclick="filterBrand('all')">Все товары</button>
+    <button onclick="filterBrand('Balenciaga')">Balenciaga</button>
+    <button onclick="filterBrand('Fear Of God')">Fear Of God</button>
+    <button onclick="filterBrand('Maison Margiela')">Maison Margiela</button>
+    <button onclick="filterBrand('ERD')">ERD</button>
+    <button onclick="filterBrand('Amiri')">Amiri</button>
+    <button onclick="filterBrand('Acne Studios')">Acne Studios</button>
+
+</div>
 
 
 <div class="categories">
@@ -841,6 +910,10 @@ function closeProduct() {
 
     document.getElementById("modal").classList.remove("show");
 
+}
+
+    function openMenu() {
+    document.getElementById("sideMenu").classList.add("show");
 }
 
 
