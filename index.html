@@ -30,18 +30,7 @@ body {
     z-index: 10;
 }
 
-    .menu-button {
-    position: absolute;
-    top: 22px;
-    left: 18px;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 26px;
-    cursor: pointer;
-    z-index: 300;
-}
-
+  
 .logo {
     font-size: 28px;
     font-weight: 800;
@@ -294,10 +283,24 @@ body {
     transform: translateX(-100%);
     transition: 0.25s ease;
     box-shadow: 10px 0 30px rgba(0,0,0,0.4);
+
 }
 
     .menu-button {
-    z-index: 1000 !important;
+    position: absolute;
+    top: 22px;
+    left: 18px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 26px;
+    cursor: pointer;
+    z-index: 300;
+}
+
+.menu-button.open {
+    position: fixed;
+    z-index: 1000;
 }
 
 .side-menu.show {
@@ -927,12 +930,13 @@ function closeProduct() {
 
 }
 
-   function openMenu() {
+  function openMenu() {
 
     const menu = document.getElementById("sideMenu");
     const button = document.getElementById("menuButton");
 
     menu.classList.toggle("show");
+    button.classList.toggle("open");
 
     if (menu.classList.contains("show")) {
         button.textContent = "←";
