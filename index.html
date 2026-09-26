@@ -327,7 +327,7 @@ body {
 
 <header class="header">
 
-    <button class="menu-button" onclick="openMenu()">☰</button>
+   <button class="menu-button" onclick="openMenu()" id="menuButton">☰</button>
 
     <div class="logo">
         Vamp Store
@@ -923,8 +923,18 @@ function closeProduct() {
 
 }
 
-    function openMenu() {
-    document.getElementById("sideMenu").classList.toggle("show");
+   function openMenu() {
+
+    const menu = document.getElementById("sideMenu");
+    const button = document.getElementById("menuButton");
+
+    menu.classList.toggle("show");
+
+    if (menu.classList.contains("show")) {
+        button.textContent = "←";
+    } else {
+        button.textContent = "☰";
+    }
 }
 
     function filterBrand(brand) {
