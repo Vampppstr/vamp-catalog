@@ -450,11 +450,12 @@ body {
     <!-- ТОВАР 3 -->
 
     <div
-        class="product"
-        data-category="tshirts"
-        data-name="Basic T-Shirt"
-        onclick="openProduct(2)"
-    >
+    class="product"
+    data-category="tshirts"
+    data-brand="Balenciaga"
+    data-name="Balenciaga Tee"
+    onclick="openProduct(2)"
+>
 
         <img
             class="product-image"
@@ -485,6 +486,7 @@ body {
     <div
         class="product"
         data-category="hoodies"
+        data-brand="Amiri"
         data-name="Black Zip Hoodie"
         onclick="openProduct(3)"
     >
@@ -515,6 +517,7 @@ body {
     <div
     class="product"
     data-category="jackets"
+    data-brand="Acne Studios"
     data-name="Acne Studios Wind Jacket"
     onclick="openProduct(4)"
 >
@@ -545,6 +548,7 @@ body {
     <div
     class="product"
     data-category="hoodies"
+    data-brand="Maison Margiela"
     data-name="Maison Margiela Hoodie"
     onclick="openProduct(5)"
 >
@@ -575,6 +579,7 @@ body {
  <div
     class="product"
     data-category="hoodies"
+    data-brand="ERD"
     data-name="ERD Hoodie"
     onclick="openProduct(6)"
 >
@@ -605,6 +610,7 @@ body {
     <div
     class="product"
     data-category="hoodies"
+    data-brand="Fear Of God"
     data-name="Fear Of God Zip Hoodie"
     onclick="openProduct(7)"
 >
@@ -635,6 +641,7 @@ body {
     <div
     class="product"
     data-category="hoodies"
+    data-brand="Fear Of God"
     data-name="Fear Of God hoodie"
     onclick="openProduct(8)"
 >
@@ -654,6 +661,7 @@ body {
     <div
     class="product"
     data-category="hoodies"
+    data-brand="Fear Of God"
     data-name="Fear Of God hoodie"
     onclick="openProduct(9)"
 >
@@ -673,6 +681,7 @@ body {
     <div
     class="product"
     data-category="hoodies"
+    data-brand="Fear Of God"
     data-name="Fear Of God Hoodie"
     onclick="openProduct(10)"
 >
@@ -914,6 +923,23 @@ function closeProduct() {
 
     function openMenu() {
     document.getElementById("sideMenu").classList.add("show");
+}
+
+    function filterBrand(brand) {
+
+    const products = document.querySelectorAll(".product");
+
+    products.forEach(product => {
+
+        if (brand === "all" || product.dataset.brand === brand) {
+            product.style.display = "";
+        } else {
+            product.style.display = "none";
+        }
+
+    });
+
+    document.getElementById("sideMenu").classList.remove("show");
 }
 
 
