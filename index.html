@@ -955,7 +955,7 @@ function closeProduct() {
     }
 }
 
-  function filterBrand(brand) {
+ function filterBrand(brand) {
 
     const products = document.querySelectorAll(".product");
 
@@ -970,8 +970,9 @@ function closeProduct() {
     });
 
     document.getElementById("sideMenu").classList.remove("show");
+    document.getElementById("menuButton").textContent = "☰";
 }
-
+    
 function orderProduct() {
 
     if (!selectedSize) {
