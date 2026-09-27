@@ -208,6 +208,33 @@ body {
     margin-bottom: 10px;
 }
 
+    .colors {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 5px 0 12px;
+    margin-bottom: 5px;
+}
+
+.color-image {
+    width: 58px;
+    height: 58px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.color-image:hover {
+    transform: scale(1.05);
+}
+
+.color-image:active {
+    transform: scale(0.95);
+}
+
 .sizes {
     display: flex;
     gap: 8px;
