@@ -969,6 +969,15 @@ function closeProduct() {
 
     });
 
+        const menu = document.getElementById("sideMenu");
+    const button = document.getElementById("menuButton");
+
+    menu.classList.remove("show");
+    button.classList.remove("open");
+    button.textContent = "☰";
+
+        }
+
     document.getElementById("sideMenu").classList.remove("show");
 }
 
