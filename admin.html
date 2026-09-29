@@ -173,6 +173,23 @@ products.forEach(product => {
                 <div style="color:#aaa;">
                     ${product.price}
                 </div>
+
+                <button
+    onclick="editProduct('${product.name}')"
+    style="
+        margin-top:10px;
+        background:white;
+        color:black;
+        border:none;
+        padding:8px 12px;
+        border-radius:8px;
+        font-weight:700;
+        cursor:pointer;
+    "
+>
+    ✏️ Изменить
+</button>
+                
             </div>
 
         </div>
