@@ -170,6 +170,15 @@ body {
     }
 }
 
+    .modal-image-container {
+    width: 100%;
+    max-height: 430px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
 .modal-image {
     width: 100%;
     height: auto;
@@ -784,10 +793,12 @@ body {
             ×
         </button>
 
-        <img
-            class="modal-image"
-            id="modalImage"
-        >
+       <div class="modal-image-container">
+    <img
+        class="modal-image"
+        id="modalImage"
+    >
+</div>
 
         <div class="modal-info">
 
