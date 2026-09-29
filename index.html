@@ -969,6 +969,10 @@ function openProduct(index) {
 
     document.getElementById("modalImage").src = product.image;
 
+    document.getElementById("modalImage").style.height = "430px";
+    
+    document.getElementById("modalImage").style.objectFit = "contain";
+
     document.getElementById("modalName").textContent = product.name;
 
     document.getElementById("modalPrice").textContent = product.price;
