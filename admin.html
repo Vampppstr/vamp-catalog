@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Vamp Store — Admin</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #0b0b0d;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .admin {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        .admin-card {
+            background: #151518;
+            border: 1px solid #252529;
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .admin-card h2 {
+            margin-top: 0;
+            font-size: 20px;
+        }
+
+        .admin-button {
+            width: 100%;
+            background: white;
+            color: black;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .admin-button:hover {
+            opacity: 0.9;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="admin">
+
+        <div class="logo">
+            Vamp Store
+        </div>
+
+        <div class="subtitle">
+            Панель управления
+        </div>
+
+        <div class="admin-card">
+
+            <h2>
+                Товары
+            </h2>
+
+            <button
+                class="admin-button"
+                onclick="addProduct()"
+            >
+                ＋ Добавить товар
+            </button>
+
+        </div>
+
+        <div class="admin-card">
+
+            <h2>
+                Заказы
+            </h2>
+
+            <div style="color:#888;">
+                Пока заказов нет
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function addProduct() {
+
+            alert("Раздел добавления товара скоро здесь появится.");
+
+        }
+
+    </script>
+
+</body>
+</html>
