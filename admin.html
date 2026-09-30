@@ -303,6 +303,21 @@ imagePreview.style.display = "block";
 
 }
 
+        function updateImagePreview() {
+
+    const image = document.getElementById("editImage").value.trim();
+    const preview = document.getElementById("editImagePreview");
+
+    if (!image) {
+        preview.style.display = "none";
+        return;
+    }
+
+    preview.src = image;
+    preview.style.display = "block";
+
+}
+
         function closeEditModal() {
 
     document.getElementById("editModal").classList.remove("show");
@@ -483,10 +498,11 @@ function renderProducts() {
         >
 
         <input
-            id="editPrice"
-            type="text"
-            placeholder="Цена"
-        >
+    id="editImage"
+    type="text"
+    placeholder="Имя файла изображения"
+    oninput="updateImagePreview()"
+>
 
         <input
             id="editImage"
