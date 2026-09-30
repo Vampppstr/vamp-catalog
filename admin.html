@@ -555,6 +555,14 @@ function renderProducts() {
         SUPABASE_URL,
         SUPABASE_KEY
     );
+
+supabaseClient
+    .from("products")
+    .select("*")
+    .then(result => {
+        console.log("SUPABASE PRODUCTS:", result);
+    });
+    
 </script>
     
 </body>
