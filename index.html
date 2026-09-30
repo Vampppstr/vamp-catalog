@@ -862,115 +862,23 @@ function selectSize(button) {
 
 }
 
-const products = [
+let products = [];
 
-    {
-        name: "ERD Hoodie",
-        price: "2600 грн / $33",
-        image: "photo_5834783088632860965_x.jpg",
-        description: "ERD Hoodie. Розміри: S / M / L / XL. Доставка: 14–21 днів. 🚚",
-        sizes: ["S", "M", "L", "XL"]
-    },
+async function loadProductsFromSupabase() {
+    const { data, error } = await supabaseClient
+        .from("products")
+        .select("*")
+        .order("created_at", { ascending: true });
 
-    {
-        name: "Maison Margiela Replica Gats",
-        price: "3690 грн / $83",
-        image: "photo_6028305136645508682_x.jpg",
-        description: "Maison Margiela Replica Gats. Розміри: 35 / 36 / 37 / 38 / 39 / 40 / 41 / 42 / 43 / 44. Доставка: 14–21 днів. 🚚",
-        sizes: ["35–39", "40", "41", "42", "43", "44"]
-    },
+    if (error) {
+        console.error("Ошибка загрузки товаров:", error);
+        return;
+    }
 
-    {
-        name: "Balenciaga Tee",
-        price: "1750 грн / $33",
-        image: "photo_5981002711899508346_y.jpg",
-        description: "Balenciaga Tee. Розміри: S / M / L / XL. Доставка: 14–21 днів. 🚚",
-        sizes: ["S", "M", "L", "XL"]
-    },
+    products = data;
 
-    {
-    name: "Amiri Hoodie",
-    price: "2800 грн / $33",
-    image: "photo_5981002711899508355_y.jpg",
-    description: "Amiri Hoodie. Розміри: S / M / L / XL. Доставка: 14–21 днів. 🚚",
-    sizes: ["S", "M", "L", "XL"]
-},
-
-{
-    name: "Acne Studios Wind Jacket",
-    price: "3000 грн / $33",
-    image: "photo_5857092334179258571_y.jpg",
-    description: "Acne Studios Wind Jacket. Розміри: S / M / L / XL. Доставка: 14–21 днів. 🚚",
-    sizes: ["S", "M", "L", "XL"]
-},
-
-    {
-    name: "Maison Margiela Hoodie",
-    price: "2400 грн / $33",
-    image: "photo_5834783088632860969_y.jpg",
-    description: "Maison Margiela Hoodie. Розміри: S / M / L / XL. Доставка: 14–21 днів. 🚚",
-    sizes: ["S", "M", "L", "XL"]
-},
-
-    {
-    name: "ERD Hoodie",
-    price: "2400 грн / $33",
-    image: "photo_5834783088632860968_y.jpg",
-    description: "ERD Hoodie. Розміри: S / M / L / XL. Доставка: 14–21 днів. 🚚",
-    sizes: ["S", "M", "L", "XL"]
-},
-
-    {
-    name: "Fear Of God Zip Hoodie",
-    price: "2400 грн / $33",
-    image: "photo_5834783088632860960_y.jpg",
-    description: "Fear Of God Zip Hoodie. Розміри: S / M / L / XL. Доставка: 14–21 днів. 🚚",
-    sizes: ["S", "M", "L", "XL"]
-},
-
-    {
-    name: "Fear Of God hoodie",
-    price: "2650 грн / $33",
-    image: "photo_5830129860934831859_y.jpg",
-    description: "Fear Of God hoodie. Розміри: S / M / L / XL. Доставка: 14–21 днів. 🚚",
-    sizes: ["S", "M", "L", "XL"]
-},
-
-    {
-    name: "Fear Of God hoodie",
-    price: "2650 грн / $33",
-    image: "photo_5830129860934831857_y.jpg",
-    description: "Fear Of God hoodie. Розміри: S / M / L / XL. Доставка: 14–21 днів. 🚚",
-    sizes: ["S", "M", "L", "XL"]
-},
-
-    {
-    name: "Fear Of God Hoodie",
-    price: "2300 грн / $33",
-    image: "photo_5981002711899508352_y.jpg", 
-    description: "Fear Of God Hoodie. Розміри: S / M / L / XL. Доставка: 14–21 днів. 🚚",
-    sizes: ["S", "M", "L", "XL"]
-},
-
-   {
-    name: "Maison Margiela Replica Gats",
-    price: "3690 грн / $83",
-    image: "photo_5370970635489713314_y.jpg",
-    description: "Maison Margiela Replica Gats. Розміри: 35–39 / 40 / 41 / 42 / 43 / 44. Доставка: 14–21 днів. 🚚",
-    sizes: ["35–39", "40", "41", "42", "43", "44"],
-    colors: [
-        "photo_5370970635489713314_y.jpg",
-        "photo_5370726754361745784_y.jpg",
-        "photo_5370726754361745783_y.jpg",
-        "photo_5370726754361745782_y.jpg",
-        "photo_5370726754361745781_y.jpg",
-        "photo_5370726754361745780_y.jpg",
-        "photo_5370726754361745779_y.jpg",
-        "photo_5370726754361745778_y.jpg"
-    ]
+    console.log("Товары загружены из Supabase:", products);
 }
-
-];
 
 
 function openProduct(index) {
@@ -1169,6 +1077,9 @@ document
         SUPABASE_URL,
         SUPABASE_KEY
     );
+
+loadProductsFromSupabase();
+        
 </script>
 
 </body>
