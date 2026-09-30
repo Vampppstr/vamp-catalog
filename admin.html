@@ -289,6 +289,12 @@ function editProduct(name) {
     document.getElementById("editName").value = product.name;
     document.getElementById("editPrice").value = product.price;
     document.getElementById("editImage").value = product.image;
+
+    const imagePreview = document.getElementById("editImagePreview");
+
+imagePreview.src = product.image;
+imagePreview.style.display = "block";
+    
     document.getElementById("editSizes").value = product.sizes
         ? product.sizes.join(", ")
         : "";
@@ -487,6 +493,19 @@ function renderProducts() {
             type="text"
             placeholder="Имя файла изображения"
         >
+
+        <img
+    id="editImagePreview"
+    style="
+        width: 100%;
+        max-height: 300px;
+        object-fit: contain;
+        border-radius: 14px;
+        margin-bottom: 15px;
+        display: none;
+        background: #202024;
+    "
+>
 
         <input
             id="editSizes"
