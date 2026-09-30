@@ -149,6 +149,40 @@
 
 const productsList = document.getElementById("productsList");
 
+     function addProduct() {
+
+    const name = prompt("Введите название товара:");
+
+    if (!name) {
+        return;
+    }
+
+    const price = prompt("Введите цену товара:");
+
+    if (!price) {
+        return;
+    }
+
+    const image = prompt("Введите имя файла изображения:");
+
+    if (!image) {
+        return;
+    }
+
+    products.push({
+        name: name,
+        price: price,
+        image: image
+    });
+
+    localStorage.setItem(
+        "vampProducts",
+        JSON.stringify(products)
+    );
+
+    renderProducts();
+}   
+
 
 function editProduct(name) {
 
