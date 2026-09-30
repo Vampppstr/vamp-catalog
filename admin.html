@@ -186,13 +186,42 @@ const productsList = document.getElementById("productsList");
 
 function editProduct(name) {
 
+    const product = products.find(
+        product => product.name === name
+    );
+
+    if (!product) {
+        return;
+    }
+
+    const newName = prompt(
+        "Введите новое название товара:",
+        product.name
+    );
+
+    if (!newName) {
+        return;
+    }
+
     const newPrice = prompt(
-        "Введите новую цену для " + name
+        "Введите новую цену товара:",
+        product.price
     );
 
     if (!newPrice) {
         return;
     }
+
+    product.name = newName;
+    product.price = newPrice;
+
+    localStorage.setItem(
+        "vampProducts",
+        JSON.stringify(products)
+    );
+
+    renderProducts();
+}
 
     const product = products.find(
         product => product.name === name
