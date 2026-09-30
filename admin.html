@@ -220,26 +220,7 @@ function editProduct(name) {
         JSON.stringify(products)
     );
 
-    renderProducts();
-}
-
-    const product = products.find(
-        product => product.name === name
-    );
-
-    if (!product) {
-        return;
-    }
-
-    product.price = newPrice;
-
-    localStorage.setItem(
-    "vampProducts",
-    JSON.stringify(products)
-);
-
-    renderProducts();
-
+ renderProducts();
 }
 
       function deleteProduct(name) {
