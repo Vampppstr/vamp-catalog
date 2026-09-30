@@ -213,6 +213,35 @@ function editProduct(name) {
 
 }
 
+      function deleteProduct(name) {
+
+    const confirmDelete = confirm(
+        "Удалить товар " + name + "?"
+    );
+
+    if (!confirmDelete) {
+        return;
+    }
+
+    const index = products.findIndex(
+        product => product.name === name
+    );
+
+    if (index === -1) {
+        return;
+    }
+
+    products.splice(index, 1);
+
+    localStorage.setItem(
+        "vampProducts",
+        JSON.stringify(products)
+    );
+
+    renderProducts();
+}
+        
+
 function renderProducts() {
 
     productsList.innerHTML = "";
@@ -267,6 +296,23 @@ function renderProducts() {
                         "
                     >
                         ✏️ Изменить
+                    </button>
+
+                    <button
+                        onclick="deleteProduct('${product.name}')"
+                        style="
+                            margin-top:10px;
+                            margin-left:5px;
+                            background:#ff4444;
+                            color:white;
+                            border:none;
+                            padding:8px 12px;
+                            border-radius:8px;
+                            font-weight:700;
+                            cursor:pointer;
+                        "
+                    >
+                        🗑 Удалить
                     </button>
 
                 </div>
