@@ -361,7 +361,7 @@ imagePreview.style.display = "block";
 }
 
 
-        function saveEditProduct() {
+        async function saveEditProduct() {
 
     if (!editingProduct) {
         return;
@@ -377,25 +377,37 @@ imagePreview.style.display = "block";
         return;
     }
 
-    editingProduct.name = newName;
-    editingProduct.price = newPrice;
-    editingProduct.image = newImage;
-
-    editingProduct.sizes = sizesInput
+    const newSizes = sizesInput
         .split(",")
         .map(size => size.trim())
         .filter(size => size);
 
-    localStorage.setItem(
-        "vampProducts",
-        JSON.stringify(products)
-    );
+    const { data, error } = await supabaseClient
+        .from("products")
+        .update({
+            name: newName,
+            price: newPrice,
+            image: newImage,
+            sizes: newSizes
+        })
+        .eq("id", editingProduct.id)
+        .select();
 
-    renderProducts();
+    if (error) {
+        console.error("Ошибка обновления товара:", error);
+        alert("Не удалось сохранить изменения.");
+        return;
+    }
+
+    console.log("Товар обновлён в Supabase:", data);
+
+    await loadProductsFromSupabase();
 
     closeEditModal();
 
     editingProduct = null;
+
+    alert("Товар успешно обновлён!");
 }
         
 
