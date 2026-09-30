@@ -169,12 +169,25 @@ const productsList = document.getElementById("productsList");
         return;
     }
 
+         const sizesInput = prompt(
+    "Введите размеры через запятую (например: S, M, L, XL):"
+);
+
+if (!sizesInput) {
+    return;
+}
+
+const sizes = sizesInput
+    .split(",")
+    .map(size => size.trim())
+    .filter(size => size);
+
    products.push({
     name: name,
     price: price,
     image: image,
-    sizes: ["S", "M", "L", "XL"]
-});
+    sizes: sizes
+        });
 
     localStorage.setItem(
         "vampProducts",
