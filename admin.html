@@ -231,6 +231,27 @@
 
 const productsList = document.getElementById("productsList");
 
+        async function loadProductsFromSupabase() {
+
+    const { data, error } = await supabaseClient
+        .from("products")
+        .select("*")
+        .order("created_at", { ascending: true });
+
+    if (error) {
+        console.error("Ошибка загрузки товаров из Supabase:", error);
+        return;
+    }
+
+    products.splice(
+        0,
+        products.length,
+        ...data
+    );
+
+    renderProducts();
+}
+
      function addProduct() {
 
     const name = prompt("Введите название товара:");
@@ -609,6 +630,8 @@ async function uploadProductsToSupabase() {
         "Загружено товаров: " + productsForSupabase.length
     );
 }
+
+    loadProductsFromSupabase();
     
 </script>
     
