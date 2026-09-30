@@ -565,13 +565,33 @@ function renderProducts() {
 
 async function uploadProductsToSupabase() {
 
-    const productsForSupabase = products.map(product => ({
-        name: product.name,
-        price: product.price,
-        image: product.image,
-        sizes: product.sizes || [],
-        colors: product.colors || null
-    }));
+    const { data: existingProducts, error: checkError } =
+        await supabaseClient
+            .from("products")
+            .select("name");
+
+    if (checkError) {
+        console.error("Ошибка проверки товаров:", checkError);
+        alert("Не удалось проверить товары в Supabase.");
+        return;
+    }
+
+    const existingNames = existingProducts.map(product => product.name);
+
+    const productsForSupabase = products
+        .filter(product => !existingNames.includes(product.name))
+        .map(product => ({
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            sizes: product.sizes || [],
+            colors: product.colors || null
+        }));
+
+    if (productsForSupabase.length === 0) {
+        alert("Все товары уже есть в Supabase.");
+        return;
+    }
 
     const { data, error } = await supabaseClient
         .from("products")
@@ -585,7 +605,9 @@ async function uploadProductsToSupabase() {
     }
 
     console.log("Товары загружены в Supabase:", data);
-    alert("Товары успешно загружены в Supabase!");
+    alert(
+        "Загружено товаров: " + productsForSupabase.length
+    );
 }
     
 </script>
