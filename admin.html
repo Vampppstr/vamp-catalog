@@ -272,6 +272,7 @@ const sizes = sizesInput
     renderProducts();
 }   
 
+        let editingProduct = null;
 
 function editProduct(name) {
 
@@ -282,6 +283,8 @@ function editProduct(name) {
     if (!product) {
         return;
     }
+
+    editingProduct = product;
 
     document.getElementById("editName").value = product.name;
     document.getElementById("editPrice").value = product.price;
@@ -299,6 +302,45 @@ function editProduct(name) {
     document.getElementById("editModal").classList.remove("show");
 
 }
+
+
+        function saveEditProduct() {
+
+    if (!editingProduct) {
+        return;
+    }
+
+    const newName = document.getElementById("editName").value.trim();
+    const newPrice = document.getElementById("editPrice").value.trim();
+    const newImage = document.getElementById("editImage").value.trim();
+    const sizesInput = document.getElementById("editSizes").value.trim();
+
+    if (!newName || !newPrice || !newImage || !sizesInput) {
+        alert("Заполните все поля.");
+        return;
+    }
+
+    editingProduct.name = newName;
+    editingProduct.price = newPrice;
+    editingProduct.image = newImage;
+
+    editingProduct.sizes = sizesInput
+        .split(",")
+        .map(size => size.trim())
+        .filter(size => size);
+
+    localStorage.setItem(
+        "vampProducts",
+        JSON.stringify(products)
+    );
+
+    renderProducts();
+
+    closeEditModal();
+
+    editingProduct = null;
+}
+        
 
       function deleteProduct(name) {
 
