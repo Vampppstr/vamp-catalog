@@ -284,12 +284,15 @@ function editProduct(name) {
         return;
     }
 
-    editingProduct = product;
+   editingProduct = product;
 
-    console.log("editName:", document.getElementById("editName"));
-console.log("editPrice:", document.getElementById("editPrice"));
-console.log("editImage:", document.getElementById("editImage"));
-console.log("editSizes:", document.getElementById("editSizes"));
+document.getElementById("editName").value = product.name;
+document.getElementById("editPrice").value = product.price;
+document.getElementById("editImage").value = product.image;
+
+document.getElementById("editSizes").value = product.sizes
+    ? product.sizes.join(", ")
+    : "";
     
     const imagePreview = document.getElementById("editImagePreview");
 
@@ -493,25 +496,25 @@ function renderProducts() {
         <h2>Редактировать товар</h2>
 
         <input
-            id="editName"
-            type="text"
-            placeholder="Название товара"
-        >
+    id="editName"
+    type="text"
+    placeholder="Название товара"
+>
 
-        <input
+<input
+    id="editPrice"
+    type="text"
+    placeholder="Цена"
+>
+
+<input
     id="editImage"
     type="text"
     placeholder="Имя файла изображения"
     oninput="updateImagePreview()"
 >
 
-        <input
-            id="editImage"
-            type="text"
-            placeholder="Имя файла изображения"
-        >
-
-        <img
+<img
     id="editImagePreview"
     style="
         width: 100%;
@@ -524,18 +527,18 @@ function renderProducts() {
     "
 >
 
-        <input
-            id="editSizes"
-            type="text"
-            placeholder="Размеры: S, M, L, XL"
-        >
+<input
+    id="editSizes"
+    type="text"
+    placeholder="Размеры: S, M, L, XL"
+>
 
-        <button
-            class="edit-save"
-            onclick="saveEditProduct()"
-        >
-            💾 Сохранить изменения
-        </button>
+<button
+    class="edit-save"
+    onclick="saveEditProduct()"
+>
+    💾 Сохранить изменения
+</button>
 
     </div>
 
