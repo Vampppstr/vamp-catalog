@@ -119,6 +119,8 @@
 
     <script>
 
+        const savedProducts = localStorage.getItem("vampProducts");
+
         const products = [
     {
         name: "ERD Hoodie",
@@ -136,6 +138,14 @@
         image: "photo_5981002711899508346_y.jpg"
     }
 ];
+
+        if (savedProducts) {
+    products.splice(
+        0,
+        products.length,
+        ...JSON.parse(savedProducts)
+    );
+}
 
 const productsList = document.getElementById("productsList");
 
