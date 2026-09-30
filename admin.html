@@ -160,6 +160,11 @@ function editProduct(name) {
 
     product.price = newPrice;
 
+    localStorage.setItem(
+    "vampProducts",
+    JSON.stringify(products)
+);
+
     renderProducts();
 
 }
