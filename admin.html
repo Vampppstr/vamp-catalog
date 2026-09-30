@@ -286,7 +286,9 @@ function editProduct(name) {
     document.getElementById("editName").value = product.name;
     document.getElementById("editPrice").value = product.price;
     document.getElementById("editImage").value = product.image;
-    document.getElementById("editSizes").value = product.sizes.join(", ");
+    document.getElementById("editSizes").value = product.sizes
+        ? product.sizes.join(", ")
+        : "";
 
     document.getElementById("editModal").classList.add("show");
 
