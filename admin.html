@@ -169,11 +169,12 @@ const productsList = document.getElementById("productsList");
         return;
     }
 
-    products.push({
-        name: name,
-        price: price,
-        image: image
-    });
+   products.push({
+    name: name,
+    price: price,
+    image: image,
+    sizes: ["S", "M", "L", "XL"]
+});
 
     localStorage.setItem(
         "vampProducts",
