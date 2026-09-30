@@ -556,12 +556,30 @@ function renderProducts() {
         SUPABASE_KEY
     );
 
-supabaseClient
-    .from("products")
-    .select("*")
-    .then(result => {
-        console.log("SUPABASE PRODUCTS:", result);
-    });
+async function uploadProductsToSupabase() {
+
+    const productsForSupabase = products.map(product => ({
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        sizes: product.sizes || [],
+        colors: product.colors || null
+    }));
+
+    const { data, error } = await supabaseClient
+        .from("products")
+        .insert(productsForSupabase)
+        .select();
+
+    if (error) {
+        console.error("Ошибка загрузки товаров:", error);
+        alert("Ошибка загрузки товаров. Смотри Console.");
+        return;
+    }
+
+    console.log("Товары загружены в Supabase:", data);
+    alert("Товары успешно загружены в Supabase!");
+}
     
 </script>
     
