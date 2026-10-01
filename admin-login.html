@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vamp Store — Вход</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+    <h1>Вход в админку</h1>
+
+    <input id="email" type="email" placeholder="Email">
+
+    <input id="password" type="password" placeholder="Пароль">
+
+    <button onclick="login()">Войти</button>
+
+    <p id="error"></p>
+
+    <script>
+
+        const SUPABASE_URL = "https://xwsfzwjblqgwlkxwlokp.supabase.co";
+
+        const SUPABASE_KEY = "sb_publishable_JuDfyrkFwTumjlYEYs1edA_woFh_nI_";
+
+        const supabaseClient = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+        async function login() {
+
+            const email = document.getElementById("email").value.trim();
+
+            const password = document.getElementById("password").value;
+
+            const { data, error } = await supabaseClient.auth.signInWithPassword({
+                email: email,
+                password: password
+            });
+
+
+            if (error) {
+
+                document.getElementById("error").textContent =
+                    "Неверный email или пароль.";
+
+                return;
+            }
+
+
+            window.location.href = "admin.html";
+        }
+
+    </script>
+
+</body>
+</html>
