@@ -3,50 +3,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Vamp Store — Вход</title>
 
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b0b0d;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* КРАСНОЕ СВЕЧЕНИЕ ПО БОКАМ */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+
+            background:
+                radial-gradient(
+                    ellipse 180px 70% at 0% 50%,
+                    rgba(120, 0, 0, 0.26) 0%,
+                    rgba(80, 0, 0, 0.13) 35%,
+                    rgba(0, 0, 0, 0) 100%
+                ),
+                radial-gradient(
+                    ellipse 180px 70% at 100% 50%,
+                    rgba(120, 0, 0, 0.26) 0%,
+                    rgba(80, 0, 0, 0.13) 35%,
+                    rgba(0, 0, 0, 0) 100%
+                );
+        }
+
+        /* КАРТОЧКА */
+
+        .login-container {
+            position: relative;
+            z-index: 1;
+
+            width: 100%;
+            max-width: 390px;
+
+            margin: 20px;
+            padding: 35px 28px 30px;
+
+            background: rgba(21, 21, 24, 0.92);
+
+            border: 1px solid #29292e;
+            border-radius: 22px;
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.55),
+                inset 0 1px 0 rgba(255, 255, 255, 0.03);
+
+            backdrop-filter: blur(15px);
+
+            animation: appear 0.35s ease;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ЛОГО */
+
+        .logo {
+            text-align: center;
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 30px;
+        }
+
+        /* ЗАГОЛОВОК */
+
+        .title {
+            font-size: 21px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        /* ПОЛЯ */
+
+        .input-group {
+            margin-bottom: 14px;
+        }
+
+        .input-label {
+            display: block;
+            color: #999;
+            font-size: 12px;
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+
+            background: #19191d;
+            border: 1px solid #29292e;
+            border-radius: 12px;
+
+            padding: 14px 15px;
+
+            color: white;
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.2s ease;
+        }
+
+        input::placeholder {
+            color: #666;
+        }
+
+        input:focus {
+            border-color: #555;
+            background: #1c1c20;
+            box-shadow: 0 0 0 3px rgba(120, 0, 0, 0.12);
+        }
+
+        /* КНОПКА */
+
+        .login-button {
+            width: 100%;
+
+            margin-top: 8px;
+
+            border: none;
+            border-radius: 12px;
+
+            background: white;
+            color: black;
+
+            padding: 14px;
+
+            font-size: 14px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: 0.15s ease;
+        }
+
+        .login-button:hover {
+            transform: translateY(-1px);
+            opacity: 0.92;
+        }
+
+        .login-button:active {
+            transform: scale(0.98);
+        }
+
+        /* ОШИБКА */
+
+        #error {
+            color: #ff5555;
+            text-align: center;
+
+            font-size: 13px;
+
+            margin-top: 15px;
+
+            min-height: 18px;
+        }
+
+        /* ТЕКСТ СНИЗУ */
+
+        .footer {
+            text-align: center;
+            color: #555;
+            font-size: 11px;
+            margin-top: 25px;
+        }
+
+        /* ТЕЛЕФОН */
+
+        @media (max-width: 480px) {
+
+            .login-container {
+                padding: 30px 22px 25px;
+                border-radius: 20px;
+            }
+
+            .logo {
+                font-size: 27px;
+            }
+
+        }
+
+    </style>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 </head>
 
 <body>
 
-    <h1>Вход в админку</h1>
+    <div class="login-container">
 
-    <input id="email" type="email" placeholder="Email">
+        <div class="logo">
+            Vamp Store
+        </div>
 
-    <input id="password" type="password" placeholder="Пароль">
+        <div class="subtitle">
+            ADMIN PANEL
+        </div>
 
-    <button onclick="login()">Войти</button>
+        <div class="title">
+            Вход в админку
+        </div>
 
-    <p id="error"></p>
+        <div class="input-group">
+
+            <label class="input-label">
+                Email
+            </label>
+
+            <input
+                id="email"
+                type="email"
+                placeholder="Введите email"
+            >
+
+        </div>
+
+        <div class="input-group">
+
+            <label class="input-label">
+                Пароль
+            </label>
+
+            <input
+                id="password"
+                type="password"
+                placeholder="Введите пароль"
+            >
+
+        </div>
+
+        <button class="login-button" onclick="login()">
+            ВОЙТИ
+        </button>
+
+        <p id="error"></p>
+
+        <div class="footer">
+            Vamp Store • Private Admin
+        </div>
+
+    </div>
+
 
     <script>
 
-        const SUPABASE_URL = "https://xwsfzwjblqgwlkxwlokp.supabase.co";
+        const SUPABASE_URL =
+            "https://xwsfzwjblqgwlkxwlokp.supabase.co";
 
-        const SUPABASE_KEY = "sb_publishable_JuDfyrkFwTumjlYEYs1edA_woFh_nI_";
+        const SUPABASE_KEY =
+            "sb_publishable_JuDfyrkFwTumjlYEYs1edA_woFh_nI_";
 
-        const supabaseClient = window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
-        );
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
 
 
         async function login() {
 
-            const email = document.getElementById("email").value.trim();
+            const email =
+                document.getElementById("email").value.trim();
 
-            const password = document.getElementById("password").value;
+            const password =
+                document.getElementById("password").value;
 
-            const { data, error } = await supabaseClient.auth.signInWithPassword({
-                email: email,
-                password: password
-            });
+
+            const errorElement =
+                document.getElementById("error");
+
+
+            errorElement.textContent = "";
+
+
+            if (!email || !password) {
+
+                errorElement.textContent =
+                    "Введите email и пароль.";
+
+                return;
+            }
+
+
+            const { data, error } =
+                await supabaseClient.auth.signInWithPassword({
+
+                    email: email,
+
+                    password: password
+
+                });
 
 
             if (error) {
 
-                document.getElementById("error").textContent =
+                errorElement.textContent =
                     "Неверный email или пароль.";
 
                 return;
@@ -54,6 +346,7 @@
 
 
             window.location.href = "admin.html";
+
         }
 
     </script>
