@@ -69,6 +69,33 @@
         .admin-button:hover {
             opacity: 0.9;
         }
+        .logout-button {
+    display: block;
+    width: auto;
+    margin: 35px auto 10px;
+
+    background: #8b0000;
+    color: white;
+
+    border: 1px solid #a80000;
+    padding: 9px 22px;
+    border-radius: 9px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.logout-button:hover {
+    background: #a8000a;
+    transform: scale(1.03);
+}
+
+.logout-button:active {
+    transform: scale(0.97);
+}
 
         .edit-modal {
     position: fixed;
@@ -161,10 +188,9 @@
             Панель управления
         </div>
 
-        <button
-    class="admin-button"
+       <button
+    class="logout-button"
     onclick="logoutAdmin()"
-    style="margin-bottom: 20px;"
 >
     Выйти
 </button>
