@@ -66,11 +66,33 @@ body::before {
 
   
 .logo {
-    font-size: 28px;
-    font-weight: 800;
-    letter-spacing: 2px;
+    position: relative;
+
+    font-family: "Arial Narrow", Arial, sans-serif;
+    font-size: 27px;
+    font-weight: 700;
+    letter-spacing: 3px;
+
     margin-bottom: 18px;
     margin-left: 42px;
+
+    display: inline-block;
+}
+
+.logo::after {
+    content: "∨   ∨";
+
+    position: absolute;
+    left: 50%;
+    bottom: -9px;
+
+    transform: translateX(-50%);
+
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 4px;
+
+    color: #aaa;
 }
 
 .search {
