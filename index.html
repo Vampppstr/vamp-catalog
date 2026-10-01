@@ -68,31 +68,47 @@ body::before {
 .logo {
     position: relative;
 
-    font-family: "Arial Narrow", Arial, sans-serif;
-    font-size: 27px;
-    font-weight: 700;
-    letter-spacing: 3px;
+    font-family: Arial, sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 2px;
 
-    margin-bottom: 18px;
+    margin-bottom: 22px;
     margin-left: 42px;
 
     display: inline-block;
 }
 
-.logo::after {
-    content: "∨   ∨";
+.logo::before {
+    content: "";
 
     position: absolute;
     left: 50%;
-    bottom: -9px;
+    bottom: -10px;
+
+    width: 34px;
+    height: 8px;
 
     transform: translateX(-50%);
 
-    font-size: 9px;
-    font-weight: 400;
-    letter-spacing: 4px;
+    background:
+        linear-gradient(
+            135deg,
+            transparent 48%,
+            #aaa 49%,
+            #aaa 52%,
+            transparent 53%
+        ) left,
+        linear-gradient(
+            225deg,
+            transparent 48%,
+            #aaa 49%,
+            #aaa 52%,
+            transparent 53%
+        ) right;
 
-    color: #aaa;
+    background-size: 15px 8px;
+    background-repeat: no-repeat;
 }
 
 .search {
