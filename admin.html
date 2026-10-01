@@ -161,6 +161,14 @@
             Панель управления
         </div>
 
+        <button
+    class="admin-button"
+    onclick="logoutAdmin()"
+    style="margin-bottom: 20px;"
+>
+    Выйти
+</button>
+
         <div class="admin-card">
 
             <h2>
@@ -659,6 +667,11 @@ async function checkAdminAuth() {
 
     loadProductsFromSupabase();
     console.log("SUPABASE LOAD STARTED");
+}
+
+    async function logoutAdmin() {
+    await supabaseClient.auth.signOut();
+    window.location.href = "admin-login.html";
 }
     
 </script>
