@@ -324,27 +324,29 @@ function editProduct(name) {
         return;
     }
 
-   editingProduct = product;
+    if (!product.id) {
+        alert("У товара нет ID в Supabase.");
+        console.error("Товар без ID:", product);
+        return;
+    }
 
-document.getElementById("editName").value = product.name;
-document.getElementById("editPrice").value = product.price;
-document.getElementById("editImage").value = product.image;
+    editingProduct = product;
 
-document.getElementById("editSizes").value = product.sizes
-    ? product.sizes.join(", ")
-    : "";
-    
-    const imagePreview = document.getElementById("editImagePreview");
+    document.getElementById("editName").value = product.name;
+    document.getElementById("editPrice").value = product.price;
+    document.getElementById("editImage").value = product.image;
 
-imagePreview.src = product.image;
-imagePreview.style.display = "block";
-    
     document.getElementById("editSizes").value = product.sizes
         ? product.sizes.join(", ")
         : "";
 
-    document.getElementById("editModal").classList.add("show");
+    const imagePreview =
+        document.getElementById("editImagePreview");
 
+    imagePreview.src = product.image;
+    imagePreview.style.display = "block";
+
+    document.getElementById("editModal").classList.add("show");
 }
 
         function updateImagePreview() {
