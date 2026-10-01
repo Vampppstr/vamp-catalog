@@ -264,7 +264,7 @@ const productsList = document.getElementById("productsList");
     renderProducts();
 }
 
-     function addProduct() {
+    async function addProduct() {
 
     const name = prompt("Введите название товара:");
 
@@ -284,33 +284,42 @@ const productsList = document.getElementById("productsList");
         return;
     }
 
-         const sizesInput = prompt(
-    "Введите размеры через запятую (например: S, M, L, XL):"
-);
-
-if (!sizesInput) {
-    return;
-}
-
-const sizes = sizesInput
-    .split(",")
-    .map(size => size.trim())
-    .filter(size => size);
-
-   products.push({
-    name: name,
-    price: price,
-    image: image,
-    sizes: sizes
-        });
-
-    localStorage.setItem(
-        "vampProducts",
-        JSON.stringify(products)
+    const sizesInput = prompt(
+        "Введите размеры через запятую (например: S, M, L, XL):"
     );
 
-    renderProducts();
-}   
+    if (!sizesInput) {
+        return;
+    }
+
+    const sizes = sizesInput
+        .split(",")
+        .map(size => size.trim())
+        .filter(size => size);
+
+    const { data, error } = await supabaseClient
+        .from("products")
+        .insert({
+            name: name,
+            price: price,
+            image: image,
+            sizes: sizes
+        })
+        .select()
+        .single();
+
+    if (error) {
+        console.error("Ошибка добавления товара:", error);
+        alert("Не удалось добавить товар.");
+        return;
+    }
+
+    console.log("Товар добавлен в Supabase:", data);
+
+    await loadProductsFromSupabase();
+
+    alert("Товар успешно добавлен!");
+}
 
         let editingProduct = null;
 
