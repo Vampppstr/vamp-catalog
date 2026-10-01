@@ -19,6 +19,40 @@ body {
     background: #0b0b0d;
     color: white;
     min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+
+    background:
+        radial-gradient(
+            ellipse 180px 70% at 0% 50%,
+            rgba(120, 0, 0, 0.20) 0%,
+            rgba(80, 0, 0, 0.10) 35%,
+            rgba(0, 0, 0, 0) 100%
+        ),
+        radial-gradient(
+            ellipse 180px 70% at 100% 50%,
+            rgba(120, 0, 0, 0.20) 0%,
+            rgba(80, 0, 0, 0.10) 35%,
+            rgba(0, 0, 0, 0) 100%
+        );
+}
+
+    .header,
+.categories,
+.products,
+.modal,
+.side-menu,
+.menu-button {
+    position: relative;
+    z-index: 1;
 }
 
 .header {
