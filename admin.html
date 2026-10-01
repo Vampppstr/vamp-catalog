@@ -647,8 +647,19 @@ async function uploadProductsToSupabase() {
     );
 }
 
+    checkAdminAuth();
+
+async function checkAdminAuth() {
+    const { data: { user } } = await supabaseClient.auth.getUser();
+
+    if (!user) {
+        window.location.href = "admin-login.html";
+        return;
+    }
+
     loadProductsFromSupabase();
     console.log("SUPABASE LOAD STARTED");
+}
     
 </script>
     
