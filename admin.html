@@ -421,7 +421,7 @@ function editProduct(name) {
 }
         
 
-      function deleteProduct(name) {
+      async function deleteProduct(name) {
 
     const confirmDelete = confirm(
         "Удалить товар " + name + "?"
@@ -431,22 +431,33 @@ function editProduct(name) {
         return;
     }
 
-    const index = products.findIndex(
+    const product = products.find(
         product => product.name === name
     );
 
-    if (index === -1) {
+    if (!product) {
         return;
     }
 
-    products.splice(index, 1);
+    if (!product.id) {
+        alert("У товара нет ID в Supabase.");
+        return;
+    }
 
-    localStorage.setItem(
-        "vampProducts",
-        JSON.stringify(products)
-    );
+    const { error } = await supabaseClient
+        .from("products")
+        .delete()
+        .eq("id", product.id);
 
-    renderProducts();
+    if (error) {
+        console.error("Ошибка удаления товара:", error);
+        alert("Не удалось удалить товар.");
+        return;
+    }
+
+    await loadProductsFromSupabase();
+
+    alert("Товар успешно удалён!");
 }
         
 
